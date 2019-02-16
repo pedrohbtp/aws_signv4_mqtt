@@ -8,6 +8,11 @@ Inspired by:
   * https://gist.github.com/prestomation/24b959e51250a8723b9a5a4f70dcae08
 * https://gist.github.com/kn9ts/4b5a9942b6afbfc2534f2f14c87b9b54
 
+# Installing
+
+```bash
+pip install aws-signv4-mqtt
+```
 
 # How to use use
 
