@@ -5,7 +5,7 @@ topic = '<your_topic>'
 i = 0
 
 var client  = mqtt.connect(url,
-    {
+    { 
         connectTimeout:5*1000,
         port: port,
     })
