@@ -1,9 +1,8 @@
 var mqtt = require('mqtt')
-url = '<your_signed_url>'
-port = 443
-topic = '<your_topic>'
-i = 0
- 
+var url = process.argv[2]
+var port = 443
+var topic = '/topics/tests/my-aws-signv4-mqtt'
+var messageRecieved = false
 var client  = mqtt.connect(url,
     { 
         connectTimeout:5*1000,
@@ -11,15 +10,35 @@ var client  = mqtt.connect(url,
     })
  
 client.on('connect', function () {
+  console.log('connected')
   client.subscribe(topic, function (err) {
     if (!err) {
       client.publish(topic, 'Hello mqtt')
     }
   })
 })
+
+client.on('close', function () {
+    console.log('close')
+    client.end()
+    if(messageRecieved == false){
+        throw new Error('Failed: Closed connection')
+    }
+  })
+
+client.on('error', function () {
+    console.log('error')
+    client.end()
+    throw new Error('Failed: Did not receive connection ack')
+  })
+
+  client.on('end', function () {
+    console.log('end')
+    client.end()
+  })
  
 client.on('message', function (topic, message) {
   console.log(message.toString())
-  i = i+1
-  client.publish(topic, 'Hello mqtt '+String(i))
+  messageRecieved = true
+  client.end()
 })
