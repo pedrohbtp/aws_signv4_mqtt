@@ -1,0 +1,8 @@
+language: python
+python: 
+  - "3.6"
+  - "3.7"
+before_install:
+  - npm install mqtt
+install:
+  - pip install -r requirements.txt
