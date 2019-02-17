@@ -30,10 +30,6 @@ def generate_signv4_mqtt( iot_host, iot_region, access_key, secret_key):
     host = iot_host
     region = iot_region
     canonical_uri = '/mqtt' 
-
-    if access_key is None or secret_key is None:
-        print('No access key is available.')
-        sys.exit()
     # Create a date for headers and the credential string
     algorithm = 'AWS4-HMAC-SHA256'
     t = datetime.datetime.utcnow()
@@ -54,4 +50,4 @@ def generate_signv4_mqtt( iot_host, iot_region, access_key, secret_key):
     signing_key = getSignatureKey(secret_key, datestamp, region, service)
     # Sign the string_to_sign using the signing_key
     signature = hmac.new(signing_key, (string_to_sign).encode('utf-8'), hashlib.sha256).hexdigest()
-    return 'wss://'+host+'/mqtt?'+urllib.parse.urlencode(canonical_querystring)+'&X-Amz-Signature=' + signature
+    return 'wss://'+host+canonical_uri+'?'+urllib.parse.urlencode(canonical_querystring)+'&X-Amz-Signature=' + signature

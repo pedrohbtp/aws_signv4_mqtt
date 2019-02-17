@@ -8,4 +8,6 @@ install:
   - pip install -e .
 
 # command to run tests
-script: pytest
+script: pytest --cov=aws_signv4_mqtt
+after_success:
+  coveralls
