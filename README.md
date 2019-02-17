@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/pedrohbtp/aws_signv4_mqtt.svg?branch=master)](https://travis-ci.com/pedrohbtp/aws_signv4_mqtt)
-
+[![Coverage Status](https://coveralls.io/repos/github/pedrohbtp/aws_signv4_mqtt/badge.svg?branch=master)](https://coveralls.io/github/pedrohbtp/aws_signv4_mqtt?branch=master)
 # aws_signv4_mqtt
 Functions to generate aws signature v4 to use with AWS IOT MQTT
 
