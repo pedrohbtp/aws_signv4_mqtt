@@ -1,7 +1,7 @@
 var mqtt = require('mqtt')
 var url = process.argv[2]
 var port = 443
-var topic = '/topics/tests/my-aws-signv4-mqtt'
+var topic = 'tests/travis/aws-signv4-mqtt'
 var messageRecieved = false
 var client  = mqtt.connect(url,
     { 
