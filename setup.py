@@ -3,7 +3,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
      name='aws_signv4_mqtt',  
-     version='0.1.3',
+     version='0.2.0',
      py_modules=['aws_signv4_mqtt'],
      scripts=[] ,
      author="Pedro Torres",
