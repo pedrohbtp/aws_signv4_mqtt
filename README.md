@@ -20,7 +20,7 @@ pip install aws-signv4-mqtt
 
 There are two interfaces:
 ```python
-aws_signv4_mqtt.generate_signv4_mqtt( iot_host, iot_region, access_key, secret_key)
+aws_signv4_mqtt.generate_signv4_mqtt( iot_host, iot_region, access_key, secret_key, session_token = None)
 ```
 
 Basic interface to created the signed url.

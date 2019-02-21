@@ -19,7 +19,7 @@ def generate_signv4_mqtt_boto( iot_host, iot_region):
     credentials = boto_session.get_credentials()
     return generate_signv4_mqtt( iot_host, iot_region, credentials.access_key, credentials.secret_key)
 
-def generate_signv4_mqtt( iot_host, iot_region, access_key, secret_key):
+def generate_signv4_mqtt( iot_host, iot_region, access_key, secret_key, session_token = None):
     '''  
     Generates the signed url to be used with amazon MQTT
     reference1: https://gist.github.com/prestomation/24b959e51250a8723b9a5a4f70dcae08
@@ -50,4 +50,8 @@ def generate_signv4_mqtt( iot_host, iot_region, access_key, secret_key):
     signing_key = getSignatureKey(secret_key, datestamp, region, service)
     # Sign the string_to_sign using the signing_key
     signature = hmac.new(signing_key, (string_to_sign).encode('utf-8'), hashlib.sha256).hexdigest()
-    return 'wss://'+host+canonical_uri+'?'+urllib.parse.urlencode(canonical_querystring)+'&X-Amz-Signature=' + signature
+    if session_token != None:
+        # adds the session token to the querystring without using it to sign
+        canonical_querystring['X-Amz-Security-Token'] = session_token
+    signed_url = 'wss://'+host+canonical_uri+'?'+urllib.parse.urlencode(canonical_querystring)+'&X-Amz-Signature=' + signature
+    return signed_url
